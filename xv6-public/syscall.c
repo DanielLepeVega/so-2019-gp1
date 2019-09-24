@@ -140,7 +140,7 @@ syscall(void)
 
   //Array de nombres de las funciones para llamadas a sistemas
 
-  char *calls_sys[23];
+  /*char *calls_sys[23];
   calls_sys[0] = "sys_fork";
   calls_sys[1] = "sys_exit";
   calls_sys[2] = "sys_wait";
@@ -163,11 +163,11 @@ syscall(void)
   calls_sys[19] = "sys_mkdir";
   calls_sys[20] = "sys_close";
   calls_sys[21] = "sys_shutdown";
-  calls_sys[22] = "sys_reboot";
+  calls_sys[22] = "sys_reboot";*/
 
   num = curproc->tf->eax;
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
-    cprintf("%s -> %d\n", calls_sys[num] ,num);
+    //cprintf("%s -> %d\n", calls_sys[num] ,num);
     curproc->tf->eax = syscalls[num]();
   } else {
     cprintf("%d %s: unknown sys call %d\n",
