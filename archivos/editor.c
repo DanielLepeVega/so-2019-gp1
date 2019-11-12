@@ -6,6 +6,17 @@
 #include <fcntl.h>
 #include <string.h>
 
+void code(char *wordF, char *word, int tempFd, char *newWord){
+    if(!strcmp(word, wordF)){
+        write(tempFd, newWord, strlen(newWord));
+        write(tempFd, " ", 1);
+    }else{
+        write(tempFd, word, strlen(word));
+        write(tempFd, " ", 1);
+    }
+}
+
+
 int main(int argc, char **argv)
 {
     char *fileName = argv[1];
@@ -26,24 +37,12 @@ int main(int argc, char **argv)
             word[index] = '\0';
             index = 0;
             //printf("La palabra es %s\n", word);
-            if(!strcmp(word, wordF)){
-                write(tempFd, newWord, strlen(newWord));
-                write(tempFd, " ", 1);
-            }else{
-                write(tempFd, word, strlen(word));
-                write(tempFd, " ", 1);
-            }
+            code(wordF, word, tempFd, newWord);
         }
     }
     word[index] = '\0';
     //printf("La palabra es %s\n", word);
-    if(!strcmp(word, wordF)){
-        write(tempFd, newWord, strlen(newWord));
-        write(tempFd, " ", 1);
-    }else{
-        write(tempFd, word, strlen(word));
-        write(tempFd, " ", 1);
-    }
+    code(wordF, word, tempFd, newWord);
     close(fd);
     close(tempFd);
     unlink(fileName);
